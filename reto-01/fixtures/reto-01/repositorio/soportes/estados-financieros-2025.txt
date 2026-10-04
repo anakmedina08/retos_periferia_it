@@ -1,0 +1,5 @@
+PLACEHOLDER DE SOPORTE (ficticio)
+Tipo: estados_financieros
+Descripción: Estados financieros auditados año 2025
+Vigencia hasta: 2027-03-31
+Emisor: CO

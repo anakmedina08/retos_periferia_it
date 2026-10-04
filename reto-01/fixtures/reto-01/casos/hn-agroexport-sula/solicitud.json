@@ -1,0 +1,14 @@
+{
+  "id": "hn-agroexport-sula",
+  "de": "administracion@agroexportsula-ficticia.hn",
+  "para": "recepcion@periferia-ficticia.com",
+  "asunto": "Registro de proveedor extranjero",
+  "fecha": "2026-08-29",
+  "pais": "HN",
+  "cliente": "Agroexport Sula S. de R.L.",
+  "formato": "xlsx",
+  "cuerpo": "Buen día,\n\nFavor completar la hoja de registro adjunta para proveedores extranjeros. Requerimos constancia de existencia de la empresa, registro tributario de su país y constancia de pago de obligaciones laborales.\n\nAtentamente,\nAdministración",
+  "adjuntos": [
+    "Registro_Proveedor_Extranjero.xlsx"
+  ]
+}

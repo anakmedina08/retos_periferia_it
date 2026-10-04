@@ -1,0 +1,68 @@
+[
+  {
+    "hoja": "Registro",
+    "celda_etiqueta": "A2",
+    "etiqueta": "Razón social",
+    "celda_valor": "B2"
+  },
+  {
+    "hoja": "Registro",
+    "celda_etiqueta": "A3",
+    "etiqueta": "RTN",
+    "celda_valor": "B3"
+  },
+  {
+    "hoja": "Registro",
+    "celda_etiqueta": "A4",
+    "etiqueta": "País",
+    "celda_valor": "B4"
+  },
+  {
+    "hoja": "Registro",
+    "celda_etiqueta": "A5",
+    "etiqueta": "Dirección",
+    "celda_valor": "B5"
+  },
+  {
+    "hoja": "Registro",
+    "celda_etiqueta": "A6",
+    "etiqueta": "Teléfono",
+    "celda_valor": "B6"
+  },
+  {
+    "hoja": "Registro",
+    "celda_etiqueta": "A7",
+    "etiqueta": "Correo electrónico",
+    "celda_valor": "B7"
+  },
+  {
+    "hoja": "Registro",
+    "celda_etiqueta": "A8",
+    "etiqueta": "Representante legal",
+    "celda_valor": "B8"
+  },
+  {
+    "hoja": "Registro",
+    "celda_etiqueta": "A9",
+    "etiqueta": "Fecha de constitución",
+    "celda_valor": "B9"
+  },
+  {
+    "hoja": "Registro",
+    "celda_etiqueta": "A10",
+    "etiqueta": "Número de empleados",
+    "celda_valor": "B10"
+  },
+  {
+    "hoja": "Registro",
+    "celda_etiqueta": "A11",
+    "etiqueta": "Ingresos anuales",
+    "celda_valor": "B11"
+  },
+  {
+    "hoja": "Registro",
+    "celda_etiqueta": "A12",
+    "etiqueta": "Referencias comerciales",
+    "celda_valor": "B12"
+  }
+]

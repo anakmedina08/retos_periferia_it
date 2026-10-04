@@ -1,0 +1,5 @@
+PLACEHOLDER DE SOPORTE (ficticio)
+Tipo: certificado_iso_9001
+Descripción: Certificado ISO 9001:2015
+Vigencia hasta: 2028-05-20
+Emisor: CO

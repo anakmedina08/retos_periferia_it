@@ -1,0 +1,5 @@
+PLACEHOLDER DE SOPORTE (ficticio)
+Tipo: rut
+Descripción: Registro Único Tributario
+Vigencia hasta: no aplica
+Emisor: CO

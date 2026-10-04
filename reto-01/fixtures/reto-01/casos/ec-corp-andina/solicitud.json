@@ -1,0 +1,14 @@
+{
+  "id": "ec-corp-andina",
+  "de": "proveedores@corpandina-ficticia.ec",
+  "para": "recepcion@periferia-ficticia.com",
+  "asunto": "Calificación de proveedores - Formulario PDF",
+  "fecha": "2026-08-27",
+  "pais": "EC",
+  "cliente": "Corporación Andina de Servicios S.A.",
+  "formato": "pdf",
+  "cuerpo": "Estimados,\n\nAdjuntamos el formulario de calificación de proveedores (Formulario_Calificacion_2026.pdf). Debe ser completado, firmado por el representante legal y devuelto con: certificado de existencia legal, registro tributario, certificación bancaria, estados financieros y certificado de cumplimiento tributario vigente.\n\nSaludos cordiales,\nGestión de Proveedores",
+  "adjuntos": [
+    "Formulario_Calificacion_2026.pdf"
+  ]
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "etiqueta": "Nombre o razón social del proveedor",
+    "obligatorio": true
+  },
+  {
+    "etiqueta": "RUC",
+    "obligatorio": true
+  },
+  {
+    "etiqueta": "Dirección",
+    "obligatorio": true
+  },
+  {
+    "etiqueta": "Teléfono",
+    "obligatorio": true
+  },
+  {
+    "etiqueta": "Correo electrónico",
+    "obligatorio": true
+  },
+  {
+    "etiqueta": "Representante legal",
+    "obligatorio": true
+  },
+  {
+    "etiqueta": "Banco",
+    "obligatorio": true
+  },
+  {
+    "etiqueta": "Número de cuenta",
+    "obligatorio": true
+  },
+  {
+    "etiqueta": "SWIFT",
+    "obligatorio": true
+  }
+]

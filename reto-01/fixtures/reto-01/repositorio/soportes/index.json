@@ -1,0 +1,44 @@
+[
+  {
+    "tipo": "camara_comercio",
+    "archivo": "camara-comercio-2026-08.txt",
+    "vigencia_hasta": "2026-09-30",
+    "pais_emisor": "CO",
+    "descripcion": "Certificado de existencia y representación legal (vigencia 30 días)"
+  },
+  {
+    "tipo": "rut",
+    "archivo": "rut-2026.txt",
+    "vigencia_hasta": null,
+    "pais_emisor": "CO",
+    "descripcion": "Registro Único Tributario"
+  },
+  {
+    "tipo": "certificacion_bancaria",
+    "archivo": "certificacion-bancaria-2026-08.txt",
+    "vigencia_hasta": "2026-12-31",
+    "pais_emisor": "CO",
+    "descripcion": "Certificación de cuenta bancaria"
+  },
+  {
+    "tipo": "parafiscales",
+    "archivo": "parafiscales-2026-07.txt",
+    "vigencia_hasta": "2026-08-31",
+    "pais_emisor": "CO",
+    "descripcion": "Certificación de pago de aportes parafiscales y seguridad social (revisor fiscal)"
+  },
+  {
+    "tipo": "estados_financieros",
+    "archivo": "estados-financieros-2025.txt",
+    "vigencia_hasta": "2027-03-31",
+    "pais_emisor": "CO",
+    "descripcion": "Estados financieros auditados año 2025"
+  },
+  {
+    "tipo": "certificado_iso_9001",
+    "archivo": "iso-9001-2025.txt",
+    "vigencia_hasta": "2028-05-20",
+    "pais_emisor": "CO",
+    "descripcion": "Certificado ISO 9001:2015"
+  }
+]

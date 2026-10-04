@@ -1,0 +1,28 @@
+{
+  "name": "reto-01-registro-proveedor",
+  "version": "1.0.0",
+  "description": "Agente conversacional de registro como proveedor (Reto 01, Periferia IT Group)",
+  "scripts": {
+    "dev": "tsx watch --env-file-if-exists=.env src/server.ts",
+    "start": "tsx --env-file-if-exists=.env src/server.ts",
+    "demo": "tsx demo.ts",
+    "typecheck": "tsc -p .",
+    "modulo": "tsx scripts/build-modulo.ts",
+    "prueba": "tsx scripts/prueba-ciclo.ts"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0",
+    "pdf-lib": "^1.17.1",
+    "zod": "^4.6.5",
+    "tsx": "^4.23.15"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "typescript": "^7.0.2"
+  },
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  }
+}

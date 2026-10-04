@@ -1,0 +1,62 @@
+[
+  {
+    "etiqueta": "Nombre de la empresa",
+    "obligatorio": true
+  },
+  {
+    "etiqueta": "RUC",
+    "obligatorio": true
+  },
+  {
+    "etiqueta": "Número de contribuyente especial",
+    "obligatorio": false
+  },
+  {
+    "etiqueta": "Domicilio fiscal",
+    "obligatorio": true
+  },
+  {
+    "etiqueta": "Ciudad",
+    "obligatorio": true
+  },
+  {
+    "etiqueta": "País",
+    "obligatorio": true
+  },
+  {
+    "etiqueta": "Teléfono",
+    "obligatorio": true
+  },
+  {
+    "etiqueta": "Correo electrónico",
+    "obligatorio": true
+  },
+  {
+    "etiqueta": "Página web",
+    "obligatorio": false
+  },
+  {
+    "etiqueta": "Representante legal",
+    "obligatorio": true
+  },
+  {
+    "etiqueta": "Cargo del representante legal",
+    "obligatorio": true
+  },
+  {
+    "etiqueta": "Actividad económica",
+    "obligatorio": true
+  },
+  {
+    "etiqueta": "Banco",
+    "obligatorio": true
+  },
+  {
+    "etiqueta": "Número de cuenta",
+    "obligatorio": true
+  },
+  {
+    "etiqueta": "SWIFT",
+    "obligatorio": true
+  }
+]

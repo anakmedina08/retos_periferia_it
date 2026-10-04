@@ -1,0 +1,104 @@
+[
+  {
+    "hoja": "Datos Proveedor",
+    "celda_etiqueta": "B3",
+    "etiqueta": "Razón social",
+    "celda_valor": "C3"
+  },
+  {
+    "hoja": "Datos Proveedor",
+    "celda_etiqueta": "B4",
+    "etiqueta": "NIT",
+    "celda_valor": "C4"
+  },
+  {
+    "hoja": "Datos Proveedor",
+    "celda_etiqueta": "B5",
+    "etiqueta": "Dígito de verificación",
+    "celda_valor": "C5"
+  },
+  {
+    "hoja": "Datos Proveedor",
+    "celda_etiqueta": "B6",
+    "etiqueta": "Dirección",
+    "celda_valor": "C6"
+  },
+  {
+    "hoja": "Datos Proveedor",
+    "celda_etiqueta": "B7",
+    "etiqueta": "Ciudad",
+    "celda_valor": "C7"
+  },
+  {
+    "hoja": "Datos Proveedor",
+    "celda_etiqueta": "B8",
+    "etiqueta": "Código postal",
+    "celda_valor": "C8"
+  },
+  {
+    "hoja": "Datos Proveedor",
+    "celda_etiqueta": "B9",
+    "etiqueta": "Teléfono",
+    "celda_valor": "C9"
+  },
+  {
+    "hoja": "Datos Proveedor",
+    "celda_etiqueta": "B10",
+    "etiqueta": "Correo electrónico",
+    "celda_valor": "C10"
+  },
+  {
+    "hoja": "Datos Proveedor",
+    "celda_etiqueta": "B11",
+    "etiqueta": "Representante legal",
+    "celda_valor": "C11"
+  },
+  {
+    "hoja": "Datos Proveedor",
+    "celda_etiqueta": "B12",
+    "etiqueta": "Cédula del representante legal",
+    "celda_valor": "C12"
+  },
+  {
+    "hoja": "Datos Proveedor",
+    "celda_etiqueta": "B13",
+    "etiqueta": "Actividad económica",
+    "celda_valor": "C13"
+  },
+  {
+    "hoja": "Datos Proveedor",
+    "celda_etiqueta": "B14",
+    "etiqueta": "Código CIIU",
+    "celda_valor": "C14"
+  },
+  {
+    "hoja": "Datos Proveedor",
+    "celda_etiqueta": "B15",
+    "etiqueta": "Régimen tributario",
+    "celda_valor": "C15"
+  },
+  {
+    "hoja": "Datos Bancarios",
+    "celda_etiqueta": "B3",
+    "etiqueta": "Banco",
+    "celda_valor": "C3"
+  },
+  {
+    "hoja": "Datos Bancarios",
+    "celda_etiqueta": "B4",
+    "etiqueta": "Tipo de cuenta",
+    "celda_valor": "C4"
+  },
+  {
+    "hoja": "Datos Bancarios",
+    "celda_etiqueta": "B5",
+    "etiqueta": "Número de cuenta",
+    "celda_valor": "C5"
+  },
+  {
+    "hoja": "Datos Bancarios",
+    "celda_etiqueta": "B6",
+    "etiqueta": "Titular de la cuenta",
+    "celda_valor": "C6"
+  }
+]

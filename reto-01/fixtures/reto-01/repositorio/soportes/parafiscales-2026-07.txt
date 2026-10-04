@@ -1,0 +1,5 @@
+PLACEHOLDER DE SOPORTE (ficticio)
+Tipo: parafiscales
+Descripción: Certificación de pago de aportes parafiscales y seguridad social (revisor fiscal)
+Vigencia hasta: 2026-08-31
+Emisor: CO

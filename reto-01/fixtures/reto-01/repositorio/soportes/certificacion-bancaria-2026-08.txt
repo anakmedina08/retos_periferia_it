@@ -1,0 +1,5 @@
+PLACEHOLDER DE SOPORTE (ficticio)
+Tipo: certificacion_bancaria
+Descripción: Certificación de cuenta bancaria
+Vigencia hasta: 2026-12-31
+Emisor: CO

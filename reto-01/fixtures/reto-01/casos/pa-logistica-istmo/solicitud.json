@@ -1,0 +1,12 @@
+{
+  "id": "pa-logistica-istmo",
+  "de": "vendors@logisticaistmo-ficticia.pa",
+  "para": "recepcion@periferia-ficticia.com",
+  "asunto": "Alta de proveedor en portal VendorHub",
+  "fecha": "2026-09-01",
+  "pais": "PA",
+  "cliente": "Logística del Istmo S.A.",
+  "formato": "portal",
+  "cuerpo": "Estimado proveedor,\n\nSu alta debe realizarse en nuestro portal https://vendorhub.logisticaistmo-ficticia.pa. Las credenciales de acceso fueron enviadas por separado al correo del representante legal. Deberá completar los campos del formulario en línea y cargar certificado de existencia y registro tributario.\n\nSoporte a proveedores",
+  "adjuntos": []
+}
