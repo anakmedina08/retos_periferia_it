@@ -63,7 +63,7 @@ valor propio en el mapeo, no llega al formulario. Las rutas `banco.*` solo se ac
 asocia esa etiqueta a ese dato bancario (RN2).
 
 **Errores (CA5).** Las herramientas devuelven `{ ok: false, error }` y nunca lanzan. Un fallo del
-proveedor LLM (timeout, 401, 429) se traduce a una frase clara, se muestra en el chat y la sesión
+proveedor LLM (timeout, 400, 401, 429) se traduce a una frase clara, se muestra en el chat y la sesión
 sigue viva.
 
 **Trazabilidad (CA4, RN5).** Cada llamada aparece en el chat, en `out/log.jsonl` (global, con
@@ -71,30 +71,46 @@ argumentos) y en `out/<caso>/log.jsonl` (por caso, escrito por la propia herrami
 
 ## 4. Elección del modelo
 
-**Anthropic, `claude-haiku-4-5`**, configurable con `LLM_MODEL`.
+**Google Gemini, `gemini-3-flash-preview`**, consumido por su endpoint compatible con OpenAI Chat
+Completions (`src/llm/openai.ts`). Se configura con `LLM_PROVIDER`, `LLM_MODEL` y `OPENAI_BASE_URL`.
 
-El trabajo del modelo aquí es orquestar cinco herramientas en orden y redactar un resumen. Toda la
-lógica de negocio es determinista y vive en las herramientas, así que no hace falta un modelo
-grande. Haiku es el más barato de la familia, sigue bien instrucciones de uso de herramientas y
-responde rápido, que es lo que nota la analista.
+Por qué este modelo:
 
-Costo estimado por caso (precio de lista de referencia: USD 1 por millón de tokens de entrada y
-USD 5 por millón de salida; verificar el precio vigente antes de la defensa):
+- El trabajo del modelo es orquestar cinco herramientas en orden y redactar un resumen. La lógica de
+  negocio es determinista y vive en las herramientas, así que un modelo de gama Flash es suficiente.
+- Tiene capa gratuita en la API, lo que permite desarrollar y demostrar el reto sin costo.
+- Soporta llamadas a herramientas con el formato de OpenAI, de modo que el mismo adaptador sirve
+  para cualquier otro proveedor compatible.
+
+Un detalle de integración: los modelos Gemini 3 adjuntan una firma de razonamiento a cada llamada a
+herramienta (`extra_content`) y exigen recibirla de vuelta en el siguiente mensaje; si falta,
+responden 400. El adaptador la conserva como un campo opaco (`LlamadaHerramienta.extra`) y la
+reenvía sin interpretarla. El ciclo del agente no cambió.
+
+El adaptador de Anthropic (`src/llm/anthropic.ts`) también está implementado: cambiar a
+`claude-haiku-4-5` es cambiar variables de entorno. Esa ruta no se probó contra la API real.
+
+**Costo por caso.** En la capa gratuita el costo es cero, con cuota diaria y por minuto limitada.
+Como referencia para producción, el precio de lista de la capa de pago es USD 0,50 por millón de
+tokens de entrada y USD 3,00 por millón de salida (la salida incluye los tokens de razonamiento):
 
 | Concepto | Tokens aproximados |
 |---|---|
 | Sistema + definiciones de herramientas, por llamada | 2.800 |
 | Llamadas al modelo por caso | 6 |
 | Entrada acumulada (el historial crece en cada vuelta) | 25.000 |
-| Salida (llamadas + resumen final) | 1.200 |
+| Salida, incluido razonamiento | 3.000 |
 
-Esto da cerca de **USD 0,03 por caso** y menos de USD 0,50 al mes con 12 solicitudes. El front
-muestra los tokens reales de la sesión para contrastar la estimación. El adaptador marca el sistema
-y las herramientas como cacheables; el ahorro aplica cuando el prefijo supera el mínimo cacheable
-del modelo.
+Esto da cerca de **USD 0,02 por caso** y menos de USD 0,30 al mes con 12 solicitudes. Son cifras
+estimadas. Medición real de una sesión con el caso `ec-corp-andina`: **PENDIENTE tokens** (el
+front muestra el total de la sesión).
+
+En la capa gratuita Google puede usar las solicitudes para mejorar sus productos. Aquí los datos son
+ficticios; con datos reales de Periferia se usaría la capa de pago o un proveedor con acuerdo de
+tratamiento de datos.
 
 Controles de gasto: tope de iteraciones, tope de tokens por sesión, tope global diario, límite de
-solicitudes por IP, tope de caracteres por mensaje y `max_tokens` por respuesta.
+solicitudes por IP, tope de caracteres por mensaje y tope de tokens por respuesta.
 
 ## 5. Diseño del portal web (no implementado)
 
@@ -129,7 +145,7 @@ persona ingresa credenciales, resuelve MFA y CAPTCHA, carga los archivos, revisa
 | La confirmación la aplica el backend, además del prompt. | Confiar en la instrucción del prompt. | Un prompt es una petición, no un control. Con datos bancarios y acciones externas la garantía tiene que estar en código y poder probarse. |
 | `generar_formulario` relee los valores del maestro e ignora los que traiga el mapeo. | Escribir lo que el modelo envía. | Elimina la clase completa de error "el modelo cambió un dígito de la cuenta". |
 | Una coincidencia difusa nunca supera 0,79 de confianza y no se escribe. | Aceptar similitud alta como match. | Una etiqueta parecida puede ser otro dato ("Número de cuenta" frente a "Número de contribuyente"). Dejar en blanco y preguntar cuesta segundos; llenar mal cuesta un rechazo. |
-| `node:http` y `fetch` directos, sin framework ni SDK. | Hono o Express, SDK del proveedor. | Corre igual en Node y Bun, menos dependencias que justificar y el adaptador queda en 60 líneas legibles. Se pierde streaming de tokens, que aquí no aporta. |
+| `node:http` y `fetch` directos, sin framework ni SDK. | Hono o Express, SDK del proveedor. | Corre igual en Node y Bun, menos dependencias que justificar y cada adaptador queda en unas 70 líneas legibles. Se pierde streaming de tokens, que aquí no aporta. |
 | HTML, CSS y JS planos para el front. | React o Svelte. | Una sola pantalla; sin paso de build se cumple "un comando" y el despliegue es trivial. |
 | Sesiones en memoria con respaldo en archivo. | Base de datos. | El PRD la excluye. En producción se reemplaza `sesiones.ts` sin tocar el ciclo. |
 
@@ -139,9 +155,9 @@ Dependencias: `zod` (obligatoria; valida argumentos y fixtures, y genera el JSON
 
 ## 7. Supuestos
 
-1. **Fecha de ejecución** es la fecha del sistema, o `FECHA_EJECUCION` si se define. Con la fecha
-   de hoy la Cámara de Comercio (vigente hasta 2026-09-30) y los parafiscales (2026-08-31) están
-   vencidos, así que ningún caso queda listo para firma. Con `FECHA_EJECUCION=2026-09-03`
+1. **Fecha de ejecución** es la fecha del sistema, o `FECHA_EJECUCION` si se define. A partir del
+   2026-10-01 la Cámara de Comercio (vigente hasta 2026-09-30) y los parafiscales (2026-08-31)
+   están vencidos, así que ningún caso queda listo para firma. Con `FECHA_EJECUCION=2026-09-03`
    `co-industrias-delta` sí queda listo.
 2. **RN1**: para clientes fuera de Colombia el campo tributario se escribe con el NIT y además
    queda en `requiere_confirmacion`. Las dos cosas a la vez, como dice la regla.
@@ -177,16 +193,12 @@ Dependencias: `zod` (obligatoria; valida argumentos y fixtures, y genera el JSON
 
 ## 9. Uso de IA
 
-> **Completa esta sección con tu experiencia real antes de entregar.** El PRD exige que puedas
-> explicar cada línea.
-
 | Asistente | Para qué | Qué se descartó o corrigió |
 |---|---|---|
-| Claude (claude.ai) | Lectura del PRD y los fixtures, diseño de la arquitectura, primera versión completa del código, pruebas y este documento. | Se descartó un bloque de "consumo de autorización" enredado en el ciclo y se reescribió en una línea. Se descartó usar un framework HTTP y los SDK de proveedor. Se corrigió que un caso inexistente creara una carpeta en `out/`. |
-| _(agrega aquí lo que uses tú)_ | | |
+| Claude (claude.ai) | Lectura del PRD y los fixtures, diseño de la arquitectura, primera versión completa del código, pruebas, guía de instalación y despliegue, y este documento. | Se descartó un bloque de "consumo de autorización" enredado en el ciclo y se reescribió en una línea. Se descartó usar un framework HTTP y los SDK de proveedor. Se corrigió que un caso inexistente creara una carpeta en `out/`. Se corrigió el adaptador compatible con OpenAI, que fallaba con error 400 en Gemini por no devolver la firma de razonamiento de las llamadas a herramientas. Se dejó de escribir el mapeo completo en el log global. |
+| Gemini (`gemini-3-flash-preview`) | Es el modelo que ejecuta el agente. No se usó para escribir código. | No aplica. |
 
-Revisión propia pendiente de declarar: qué leíste línea por línea, qué cambiaste y qué probaste con
-el modelo real.
+Trabajo propio: PENDIENTE (qué revisé línea por línea, qué cambié y qué probé con el modelo real).
 
 ## 10. Riesgos de producción y mitigación
 
@@ -197,7 +209,7 @@ el modelo real.
 | Soportes vencidos al momento de firmar. | Ya bloquea. En producción, alerta previa al vencimiento de Cámara de Comercio y parafiscales. |
 | Plantillas reales peores que los fixtures (celdas combinadas, PDF escaneado). | Extracción de etiquetas con revisión humana la primera vez por cliente; la plantilla mapeada se guarda y se reutiliza. |
 | Inyección de instrucciones en el cuerpo del correo del cliente. | El cuerpo no se envía al modelo en esta versión. Si se usa, se trata como dato y las acciones externas siguen detrás de la confirmación del backend. |
-| Datos bancarios en logs o en el chat. | El log por caso guarda resúmenes sin valores. El log global guarda argumentos, que tampoco los traen. Pendiente: enmascarar los resultados de herramientas que se muestran en el chat. |
+| Datos bancarios en logs o en el chat. | El log por caso guarda resúmenes sin valores. El log global guarda solo los argumentos simples y omite los objetos anidados, como el mapeo. Pendiente: enmascarar los resultados de herramientas que se muestran en el chat. |
 | Abuso del link público y gasto de la clave. | Topes por sesión, por día y por IP. En producción, autenticación corporativa. |
 | Disco efímero en el despliegue. | Mover `out/` a almacenamiento de objetos con retención definida. |
 | Confirmación por coincidencia de texto ("sí", "confirmo"). | Es deliberadamente estricta: ante duda no autoriza. En producción, botón con identidad del aprobador en lugar de texto libre. |

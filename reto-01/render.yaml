@@ -6,8 +6,12 @@ services:
     healthCheckPath: /api/health
     envVars:
       - key: LLM_PROVIDER
-        value: anthropic
-      - key: ANTHROPIC_API_KEY
+        value: openai
+      - key: LLM_MODEL
+        value: gemini-3-flash-preview
+      - key: OPENAI_BASE_URL
+        value: https://generativelanguage.googleapis.com/v1beta/openai
+      - key: OPENAI_API_KEY
         sync: false
       - key: MAX_TOKENS_DIA
         value: "500000"

@@ -11,11 +11,22 @@ legal. Prepara; nunca firma ni envía sin confirmación humana.
 Requiere Node 20+ (o Bun 1.1+).
 
 ```bash
-cp .env.example .env        # y escribe tu clave en ANTHROPIC_API_KEY
+cp .env.example .env        # y configura el proveedor y la clave (ver abajo)
 npm install && npm run dev  # o: bun install && bun run dev
 ```
 
 Abre <http://localhost:3000>. Front y backend salen del mismo proceso.
+
+Configuración usada en la entrega (Gemini por su endpoint compatible con OpenAI):
+
+```
+LLM_PROVIDER=openai
+LLM_MODEL=gemini-3-flash-preview
+OPENAI_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai
+OPENAI_API_KEY=<clave de Google AI Studio>
+```
+
+En Windows PowerShell, si `npm` está bloqueado por la política de scripts, usa `npm.cmd`.
 
 ## Verificación sin modelo
 
@@ -76,7 +87,7 @@ modulo/                         agente empaquetado: agent.md, tools/, skill/
 ## Desplegar
 
 El repositorio incluye `Dockerfile` y `render.yaml`. En Render: *New → Blueprint*, apunta al
-repositorio y define `ANTHROPIC_API_KEY` como secreto. En Railway o Fly.io basta el `Dockerfile` y
+repositorio y define `OPENAI_API_KEY` como secreto. Si el proyecto está en una subcarpeta del repositorio, indícala en Root Directory. En Railway o Fly.io basta el `Dockerfile` y
 la misma variable. El disco es efímero: `out/` se pierde al reiniciar, lo cual es aceptable aquí.
 
 ## Módulo reutilizable
