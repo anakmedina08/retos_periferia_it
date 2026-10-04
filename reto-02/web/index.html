@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registro de contratos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="barra">
+    <div>
+      <h1>Registro de contratos</h1>
+      <p class="sub">Buzón único de contratos. Lo dudoso no se registra sin tu confirmación.</p>
+    </div>
+    <div class="estado" id="estado" role="status">Conectando</div>
+  </header>
+
+  <main class="mesa">
+    <section class="chat" aria-label="Conversación">
+      <ol class="historial" id="historial" aria-live="polite"></ol>
+
+      <div class="confirmacion" id="confirmacion" hidden>
+        <p><strong>El agente espera tu confirmación.</strong> <span id="confirmacion-texto">Nada se ejecuta hasta que respondas.</span></p>
+        <div class="acciones">
+          <button type="button" class="primario" id="btn-confirmar">Sí, confirmo</button>
+          <button type="button" id="btn-rechazar">No por ahora</button>
+        </div>
+      </div>
+
+      <form class="entrada" id="formulario" autocomplete="off">
+        <label for="mensaje" class="oculto">Mensaje para el agente</label>
+        <textarea id="mensaje" rows="2" maxlength="4000" placeholder="Escribe, por ejemplo: procesa el buzón con fecha de hoy 2026-09-03" required></textarea>
+        <button type="submit" class="primario" id="btn-enviar">Enviar mensaje</button>
+      </form>
+    </section>
+
+    <aside class="lateral">
+      <section>
+        <h2>Buzón de contratos</h2>
+        <ul class="buzon" id="buzon"></ul>
+        <button type="button" class="primario ancho" id="btn-procesar">Procesar el buzón</button>
+      </section>
+      <section>
+        <h2>Archivos generados</h2>
+        <ul class="archivos" id="archivos"><li class="vacio">Aún no hay archivos. Procesa el buzón para verlos aquí.</li></ul>
+      </section>
+      <section class="sesion">
+        <button type="button" id="btn-nueva">Empezar una sesión nueva</button>
+        <button type="button" id="btn-reiniciar">Reiniciar el buzón de prueba</button>
+        <p class="sub" id="tokens"></p>
+      </section>
+    </aside>
+  </main>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
